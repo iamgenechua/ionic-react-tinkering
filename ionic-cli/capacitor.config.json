@@ -1,6 +1,6 @@
 {
-  "appId": "org.gene.biorhythms",
-  "appName": "Biorhythms",
+  "appId": "org.gene.cli",
+  "appName": "ionic-cli",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
@@ -9,8 +9,5 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {},
-  "server": {
-    "url": "http://192.168.1.196:3000"
-  }
+  "cordova": {}
 }
