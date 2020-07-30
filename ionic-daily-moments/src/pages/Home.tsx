@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonItem, IonList} from '@ionic/react';
-import {entries} from '../data';
+import {firestore} from '../Firebase';
 
-const Home: React.FC = () => (
+const Home: React.FC = () => {
+  const [entries, setEntries] = useState([]);
+  useEffect(() => {
+    const todosRef = firestore.collection('todos');
+    todosRef.get().then((snapshot) => {
+      const todos = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+    setEntries(todos);
+    });
+  }, []); // empty array means it will only run once when the component is mounted
+  return (
   <IonPage>
     <IonHeader>
       <IonToolbar>
@@ -20,6 +32,7 @@ const Home: React.FC = () => (
       </IonList>
     </IonContent>
   </IonPage>
-);
+  );
+}
 
 export default Home;
