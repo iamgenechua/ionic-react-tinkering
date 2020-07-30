@@ -31,7 +31,7 @@ const Home: React.FC = () => {
           <IonItem 
             button 
             key={entry.id}
-            routerLink={`/my/entries/${entry.id}`}>{entry.title}</IonItem>
+            routerLink={`/my/entries/view/${entry.id}`}>{entry.title}</IonItem>
         )}
       </IonList>
     </IonContent>

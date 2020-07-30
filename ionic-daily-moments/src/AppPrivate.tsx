@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Settings from './pages/Settings';
 import FirstEntry from './pages/FirstEntry';
 import { useAuth } from './auth';
+import AddEntryPage from './pages/AddEntryPage';
 
 
 const AppPrivate: React.FC = () => {
@@ -25,8 +26,11 @@ const AppPrivate: React.FC = () => {
             <Route exact path="/my/settings">
               <Settings />
             </Route>
-            <Route exact path="/my/entries/:id">
+            <Route exact path="/my/entries/view/:id">
               <FirstEntry />
+            </Route>
+            <Route exact path="/my/entries/add">
+              <AddEntryPage />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
