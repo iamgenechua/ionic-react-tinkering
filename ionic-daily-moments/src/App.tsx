@@ -1,38 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { IonApp, IonLoading } from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
 import AppPrivate from './AppPrivate';
 import { Route, Switch, Redirect} from 'react-router-dom';
 import Login from './pages/Login';
-import {AuthContext} from './auth';
+import {AuthContext, useAuthInit} from './auth';
 import NotFound from './pages/NotFound';
-import {auth} from './Firebase';
+import Register from './pages/Register';
 
 
 
 const App: React.FC = () => {
+  const {loading, auth} = useAuthInit();
+  console.log(`Rendering App with auth`, auth);
 
-  //logging in function
-  const [authState, setAuthState] = useState({loading: true, loggedIn: false});
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setAuthState({loading: false, loggedIn: Boolean(user)}); // when null, become false, else, true
-    })
-  }, []);
-
-  console.log(`Rendering App with LoggedIn=${authState}`);
-
-  if (authState.loading) {
+  if (loading) {
     return <IonLoading isOpen />;
   }
 
   return (
     <IonApp>
-      <AuthContext.Provider value={{loggedIn: authState.loggedIn}}>
+      <AuthContext.Provider value={auth}>
         <IonReactRouter>
             <Switch>
                 <Route exact path="/login">
                   <Login />
+                </Route>
+                <Route exact path="/register">
+                  <Register />
                 </Route>
                 <Route path="/my">
                   <AppPrivate />
